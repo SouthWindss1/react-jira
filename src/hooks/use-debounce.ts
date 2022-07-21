@@ -9,7 +9,6 @@ const useDebounce = (initValue: any, dealy: number) => {
         }, dealy)
         return ()=>{clearTimeout(timeout)}
     }, [initValue, dealy])
-    console.log(value);
     
     return value;
 }

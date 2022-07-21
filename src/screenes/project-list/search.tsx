@@ -1,5 +1,6 @@
-
-export const Search = (props) => {
+import { searchProps } from "./type"
+import { FC } from "react"
+export const Search: FC<searchProps> = (props) => {
     const { param, setParam, users } = props
     return (
         <>
