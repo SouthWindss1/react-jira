@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { List } from "./list"
 import { Search } from "./search"
+import useDebounce from '../../hooks/use-debounce'
 import qs from 'qs'
 import { clearObj } from '../../utils'
 const apiUrl = process.env.REACT_APP_API_URL
@@ -11,15 +12,16 @@ export const ListPage = () => {
     })
     const [users, setUsers] = useState([])
     const [list, setList] = useState([])
+    const debonceValue = useDebounce(param,1000)
     useEffect(() => {
-        fetch(`${apiUrl}/projects?${qs.stringify(clearObj(param))}`).then(async (res) => {
+        fetch(`${apiUrl}/projects?${qs.stringify(clearObj(debonceValue))}`).then(async (res) => {
             if (res.ok) {
                 await res.json().then((data) => {
                     setList(data)
                 })
             }
         })
-    }, [param])
+    }, [debonceValue])
     useEffect(() => {
         fetch(`${apiUrl}/users`).then(async (res) => {
             if (res.ok) {
