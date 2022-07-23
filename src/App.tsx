@@ -1,13 +1,13 @@
 import React from "react";
 import './App.css';
-import { ListPage } from './screenes/project-list';
+import AuthentiCated from "./Authenticated-app";
 import AuthPage from './login';
-
+import { useAuth } from "./context/auth-context";
 function App() {
+  const value = useAuth()
   return (
     <div className="App">
-      <ListPage />
-      <AuthPage />
+      {value?.user ? <AuthentiCated /> : <AuthPage />}
     </div>
   );
 
