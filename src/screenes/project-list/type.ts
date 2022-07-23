@@ -1,7 +1,8 @@
 
-type Users = {
+export type Users = {
     id: number,
-    name: string
+    name: string,
+    token:string
 }
 type List = Users & {
     personId: number,
