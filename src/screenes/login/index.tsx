@@ -1,8 +1,12 @@
+import { useAuth } from "../../context/auth-context";
+
 const LoginPage = () => {
+    const authValue = useAuth();
     const handleSubmit = (event: any) => {
         event.preventDefault()
         const username = (event.currentTarget.elements[0] as HTMLInputElement).value;
         const password = (event.currentTarget.elements[1] as HTMLInputElement).value;
+        authValue!.login({ username, password })
     }
 
     return (<>
