@@ -1,3 +1,5 @@
+import React from "react";
+
 import { searchProps } from "./type"
 import { FC } from "react"
 export const Search: FC<searchProps> = (props) => {

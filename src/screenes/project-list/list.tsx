@@ -1,4 +1,6 @@
 import { FC } from "react";
+import React from "react";
+
 import { ListProps } from "./type";
 export const List: FC<ListProps> = (props) => {
     const { list, users } = props;

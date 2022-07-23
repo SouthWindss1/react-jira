@@ -1,15 +1,16 @@
+import React from "react";
 import './App.css';
 import { ListPage } from './screenes/project-list';
-import LoginPage from './screenes/login';
+import AuthPage from './login';
 
 function App() {
   return (
     <div className="App">
-     <ListPage/>
-     <LoginPage/>
+      <ListPage />
+      <AuthPage />
     </div>
   );
-  
+
 }
 
 export default App;

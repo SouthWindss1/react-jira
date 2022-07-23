@@ -1,4 +1,6 @@
-import { useAuth } from "../../context/auth-context";
+import React from "react";
+
+import { useAuth } from "../context/auth-context";
 
 const LoginPage = () => {
     const authValue = useAuth();
@@ -10,7 +12,7 @@ const LoginPage = () => {
     }
 
     return (<>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}  method='post'>
             <div>
                 <label htmlFor="username">用户名</label>
                 <input type="text" id={'username'} />
