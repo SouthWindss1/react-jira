@@ -2,7 +2,7 @@ import qs from 'qs'
 import * as auth from '../auth-provider'
 const apiUrl = process.env.REACT_APP_API_URL
 interface ConfigProps extends RequestInit {
-    data?: object,
+    data?: object | string,
     token?: string
 }
 
@@ -11,7 +11,7 @@ export const http = async (endpoint: string, {
     token,
     headers,
     ...customConfig
-}: ConfigProps) => {
+}: ConfigProps = {}) => {
     const config = {
         method: 'GET',
         headers: {

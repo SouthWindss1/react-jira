@@ -1,12 +1,10 @@
 import React from "react";
-
 import { useEffect, useState } from 'react'
 import { List } from "./list"
 import { Search } from "./search"
 import useDebounce from '../../hooks/use-debounce'
-import qs from 'qs'
+import useHttp from "../../hooks/use-http";
 import { clearObj } from '../../utils'
-const apiUrl = process.env.REACT_APP_API_URL
 export const ListPage = () => {
     const [param, setParam] = useState({
         name: '',
@@ -14,24 +12,15 @@ export const ListPage = () => {
     })
     const [users, setUsers] = useState([])
     const [list, setList] = useState([])
-    const debonceValue = useDebounce(param,1000)
+    const debonceValue = useDebounce(param, 1000)
+    const http = useHttp()
     useEffect(() => {
-        fetch(`${apiUrl}/projects?${qs.stringify(clearObj(debonceValue))}`).then(async (res) => {
-            if (res.ok) {
-                await res.json().then((data) => {
-                    setList(data)
-                })
-            }
+        http('projects', { data: clearObj(debonceValue) }).then((res) => {
+            setList(res)
         })
     }, [debonceValue])
     useEffect(() => {
-        fetch(`${apiUrl}/users`).then(async (res) => {
-            if (res.ok) {
-                await res.json().then((data) => {
-                    setUsers(data)
-                })
-            }
-        })
+        http('users').then((res) => { setUsers(res) })
     }, [])
     return (
         <>
