@@ -1,34 +1,28 @@
 import { FC } from "react";
 import React from "react";
-
+import { Table } from 'antd'
 import { ListProps } from "./type";
 export const List: FC<ListProps> = (props) => {
     const { list, users } = props;
+    const columns =
+        [
+            {
+                title: '名称',
+                dataIndex: "name"
+            },
+            {
+                title: "负责人",
+                render(value:any, record:any,) {
+                    return <span>
+                        {users.find(res => res.id === record.personId)?.name || '未知'}
+                    </span>
+                },
+            }
+        ]
     return (
         <>
             <div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>名称</th>
-                            <th>负责人</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            list.map((item) => {
-                                return (
-                                    <>
-                                        <tr key={item.id}>
-                                            <td>{item.name}</td>
-                                            <td>{users.find(res => res.id === item.personId)?.name || '未知'}</td>
-                                        </tr>
-                                    </>
-                                )
-                            })
-                        }
-                    </tbody>
-                </table>
+                <Table dataSource={list} pagination={false} columns={columns}></Table>
             </div>
         </>
     )

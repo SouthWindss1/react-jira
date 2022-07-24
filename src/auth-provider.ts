@@ -5,8 +5,6 @@ export const getToken = () => {
 }
 export const handleUserResponce = ({ user }: { user: Users }) => {
   window.localStorage.setItem(localStorageKey, user.token)
-  console.log(window.localStorage.getItem(localStorageKey));
-
   return user
 }
 

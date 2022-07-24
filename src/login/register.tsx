@@ -1,28 +1,27 @@
 import React from "react";
 
 import { useAuth } from "../context/auth-context";
+import { Form, Button, Input } from 'antd';
 
 const RegisterPage = () => {
     const authValue = useAuth();
-    const handleSubmit = (event: any) => {
-        event.preventDefault()
-        const username = (event.currentTarget.elements[0] as HTMLInputElement).value;
-        const password = (event.currentTarget.elements[1] as HTMLInputElement).value;
+    const handleSubmit = (value: { username: string, password: string }) => {
+        const { username, password } = value
         authValue!.register({ username, password })
     }
 
     return (<>
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label htmlFor="username">用户名</label>
-                <input type="text" id={'username'} />
-            </div>
-            <div>
-                <label htmlFor="password">密码</label>
-                <input type="password" id={'password'} />
-            </div>
-            <button>注册</button>
-        </form>
+        <Form onFinish={handleSubmit}>
+            <Form.Item name="username">
+                <Input type="text" />
+            </Form.Item>
+            <Form.Item name="password">
+                <Input type="text" />
+            </Form.Item>
+            <Form.Item >
+                <Button type='primary' htmlType="submit">注册</Button>
+            </Form.Item>
+        </Form>
     </>)
 }
 export default RegisterPage;
